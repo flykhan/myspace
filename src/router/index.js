@@ -14,29 +14,36 @@ const routes = [
     component: HomeView
   },
   {
-    path: '/userlist',
+    path: '/userlist/',
     name: 'userlist',
     component: UserListView
   },
   {
-    path: '/userprofile',
+    // “/userprofile/:参数名/” 用于通过不同参数访问不同用户的profile页面
+    path: '/userprofile/:userId/',
     name: 'userprofile',
     component: UserProfileView
   },
   {
-    path: '/login',
+    path: '/login/',
     name: 'login',
     component: LoginView
   },
   {
-    path: '/register',
+    path: '/register/',
     name: 'register',
     component: RegisterView
   },
   {
-    path: '/404',
+    path: '/404/',
     name: '404',
     component: NotFoundView
+  },
+  // 添加正则表达式匹配，使得非合法页面一致跳转到404
+  {
+    path:'/:catchAll(.*)',
+    // 重定向到404
+    redirect:"/404/"
   }
 ]
 

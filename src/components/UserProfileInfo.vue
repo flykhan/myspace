@@ -11,22 +11,27 @@
         </div>
         <div class="col-9">
           <!-- 使用{{ 参数名 }}来引用参数 -->
-          <div class="username">{{ fullName }}</div>
-          <div class="fans">粉丝：{{ user.followerCount }}</div>
+          <div class="username">
+            <p class="text-start">{{ fullName }}</p>
+          </div>
+          <div class="fans">
+            <p class="text-start">粉丝：{{ user.followerCount }}</p>
+          </div>
           <!-- v-on:click 也可以写为 @click -->
           <button
             v-on:click="follow"
             v-if="!user.is_followed"
             type="button"
-            class="btn btn-secondary btn-sm"
+            class="btn btn-secondary btn-sm float-start"
           >
             +关注
           </button>
+
           <button
             @click="unfollow"
             v-if="user.is_followed"
             type="button"
-            class="btn btn-primary btn-sm"
+            class="btn btn-primary btn-sm float-start"
           >
             取消关注
           </button>

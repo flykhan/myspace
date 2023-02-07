@@ -2,14 +2,14 @@
   <ContentBase>
     <div class="row">
       <div class="col-3">
-        用户信息
+        <p class="lable-text">用户信息</p>
         <!-- 父组件使用 v-bind 传值给子组件; v-bind 可以省略，直接写为 :user="user" -->
         <!-- @follow @unfollow 配合子组件里使用 context.emit(),用来将子组件信息传给改父组件 -->
         <UserProfileInfo @follow="follow" @unfollow="unfollow" v-bind:user="user" />
         <UserProfileWrite @submit_post="submit_post" />
       </div>
       <div class="col-9">
-        帖子列表
+        <p class="lable-text">帖子列表</p>
         <UserProfilePosts v-bind:posts="posts" />
       </div>
     </div>
@@ -24,12 +24,23 @@ import UserProfilePosts from "../components/UserProfilePosts.vue";
 import UserProfileWrite from "../components/UserProfileWrite.vue";
 // reactive 在 vue 里，需要导入 vue 包, reactive 可以用来接收对象
 import { reactive } from "vue";
+// useRoute 用于访问链接里的参数
+import { useRoute } from "vue-router";
 
 export default {
   name: "UserProfile",
   components: { ContentBase, UserProfileInfo, UserProfilePosts, UserProfileWrite },
   // setup作为入口函数；这里也可以写成 setup () {}
   setup: () => {
+    // 把 useRoute 的对象返回回来
+    const route = useRoute();
+
+    // 获取并保存 userId
+    const userId = route.params.userId;
+    console.log(userId);
+    // route.params.userId 里的 userId 是与 'router/index.js' 中 'path: '/userprofile/:userId/',' 的 :userId 参数名是一样的
+    // console.log(route.params.userId);
+
     const user = reactive({
       id: 1,
       username: "flykhan",
@@ -97,4 +108,9 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.lable-text {
+  font-size: larger;
+  font-weight: bolder;
+}
+</style>
