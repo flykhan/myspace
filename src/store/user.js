@@ -63,7 +63,7 @@ const ModuleUser = {
     } 
 */
     login(context,data){
-      // 获取Json Web Token（JWT
+      // 获取Json Web Token
       $.ajax({
         url: "https://app165.acapp.acwing.com.cn/api/token/",
         type: "POST",
