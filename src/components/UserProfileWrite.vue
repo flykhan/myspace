@@ -18,16 +18,37 @@
 
 <script>
 import { ref } from "vue";
+import $ from "jquery";
+import { useStore } from "vuex";
+
 export default {
   name: "UserProfileWrite",
   setup: (props, context) => {
+    const store = useStore();
     // ref 获取变量
     let content = ref("");
     const submit_post = () => {
-      //   console.log(content.value);
-      // 触发父组件 submit_post 事件，然后父组件 submit_post 事件调用父组件的 submit_post 函数，参数为 content
-      context.emit("submit_post", content.value);
+      // 创建一个帖子
+      $.ajax({
+        url: "https://app165.acapp.acwing.com.cn/myspace/post/",
+        type: "POST",
+        data: {
+          content: content.value,
+        },
+        headers: {
+          Authorization: "Bearer " + store.state.user.access,
+        },
+        success(resp) {
+          if (resp.result === "success") {
+            //   console.log(content.value);
+            // 触发父组件 submit_post 事件，然后父组件 submit_post 事件调用父组件的 submit_post 函数，参数为 content
+            context.emit("submit_post", content.value);
+            content.value = "";
+          }
+        },
+      });
     };
+
     return {
       content,
       submit_post,

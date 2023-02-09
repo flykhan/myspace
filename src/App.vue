@@ -1,6 +1,7 @@
 <template>
   <NavBar />
-  <router-view />
+  <!-- 用于使用完整路径判重，并强制刷新 -->
+  <router-view :key="$route.fullPath" />
 </template>
 
 <script>

@@ -1,6 +1,6 @@
-# myspace
+# vue 项目 myspace
 
-## Project setup
+## 一.Project setup
 ```
 npm install
 ```
@@ -22,3 +22,108 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
+
+## 二.项目使用到的API
+
+1. ##### 获取Json Web Token（JWT）
+
+   地址： 
+   方法：POST
+   是否验证jwt：否
+   输入参数：
+   username: 用户名
+   password: 密码
+   返回结果：
+   access: 访问令牌，有效期5分钟
+   refresh: 刷新令牌，有效期14天
+
+2. ##### 刷新JWT令牌
+
+   地址：https://app165.acapp.acwing.com.cn/api/token/refresh/
+   方法：POST
+   是否验证jwt：否
+   输入参数：
+   refresh: 刷新令牌
+   返回结果：
+   access: 访问令牌，有效期5分钟
+
+3. ##### 获取用户列表
+
+   地址：https://app165.acapp.acwing.com.cn/myspace/userlist/
+   方法：GET
+   是否验证jwt：否
+   输入参数：无
+   返回结果：返回10个用户的信息
+
+4. ##### 获取某个用户的信息
+
+   地址：https://app165.acapp.acwing.com.cn/myspace/getinfo/
+   方法：GET
+   是否验证jwt：是
+   输入参数：
+   user_id：用户的ID
+   返回结果：该用户的信息
+
+5. ##### 获取某个用户的所有帖子
+
+   地址：https://app165.acapp.acwing.com.cn/myspace/post/
+   方法：GET
+   是否验证jwt：是
+   输入参数：
+   user_id：用户的ID
+   返回结果：该用户的所有帖子
+
+6. ##### 创建一个帖子
+
+   地址：https://app165.acapp.acwing.com.cn/myspace/post/
+   方法：POST
+   是否验证jwt：是
+   输入参数：
+   content：帖子的内容
+   返回结果：result: success
+
+7. ##### 删除一个帖子
+
+   地址：https://app165.acapp.acwing.com.cn/myspace/post/
+   方法：DELETE
+   是否验证jwt：是
+   输入参数：
+   post_id：被删除帖子的ID
+   返回结果：result: success
+
+8. ##### 更改关注状态
+
+   如果未关注，则关注；如果已关注，则取消关注。
+
+​		地址：https://app165.acapp.acwing.com.cn/myspace/follow/
+​				方法：POST
+​				是否验证jwt：是
+​				输入参数：
+​				target_id: 被关注的用户ID
+​				返回结果：result: success
+
+9. ##### 注册账号
+
+   地址：https://app165.acapp.acwing.com.cn/myspace/user/
+   方法：POST
+   是否验证jwt：否
+   输入参数：
+   username: 用户名
+   password：密码
+   password_confirm：确认密码
+   返回结果：
+   result: success
+   result: 用户名和密码不能为空
+   result: 两个密码不一致
+   result: 用户名已存在
+
+   
+
+## 三.关于信息：
+
+​		作者：yxc
+​				链接：https://www.acwing.com/blog/content/20924/
+​				来源：AcWing
+​				著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

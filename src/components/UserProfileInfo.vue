@@ -2,17 +2,13 @@
   <div class="card">
     <div class="card-body">
       <div class="row">
-        <div class="col-3">
-          <img
-            class="img-fluid"
-            src="https://git.acwing.com/uploads/-/system/user/avatar/6527/avatar.png"
-            alt=""
-          />
+        <div class="col-3 img-field">
+          <img class="img-fluid" :src="user.photo" alt="" />
         </div>
         <div class="col-9">
           <!-- 使用{{ 参数名 }}来引用参数 -->
           <div class="username">
-            <p class="text-start">{{ fullName }}</p>
+            <p class="text-start">{{ user.username }}</p>
           </div>
           <div class="fans">
             <p class="text-start">粉丝：{{ user.followerCount }}</p>
@@ -42,7 +38,9 @@
 </template>
 
 <script>
-import { computed } from "vue";
+// import { computed } from "vue";
+import $ from "jquery";
+import { useStore } from "vuex";
 
 export default {
   name: "UserProfileInfo",
@@ -55,24 +53,59 @@ export default {
   },
   setup: (props, context) => {
     // 使用 computed 计算 fullName
-    let fullName = computed(() => props.user.lastName + " " + props.user.firstName);
+    // let fullName = computed(() => props.user.lastName + " " + props.user.firstName);
+
+    const store = useStore();
 
     // 定义关注函数
     const follow = () => {
       // console.log 用来打印 console 调试信息
-      console.log("follow");
-      // context.emit 用来触发父组件的事件
-      context.emit("follow");
+      // console.log("follow");
+
+      // 更新数据库状态。更改关注状态。
+      $.ajax({
+        url: "https://app165.acapp.acwing.com.cn/myspace/follow/",
+        type: "POST",
+        data: {
+          target_id: props.user.id,
+        },
+        headers: {
+          Authorization: "Bearer " + store.state.user.access,
+        },
+        success(resp) {
+          if (resp.result === "success") {
+            // context.emit 用来触发父组件的事件
+            // 若未关注,则关注
+            context.emit("follow");
+          }
+        },
+      });
     };
 
+    // 定义取消关注函数
     const unfollow = () => {
-      console.log("unfollow");
-      context.emit("unfollow");
+      // console.log("unfollow");
+      $.ajax({
+        url: "https://app165.acapp.acwing.com.cn/myspace/follow/",
+        type: "POST",
+        data: {
+          target_id: props.user.id,
+        },
+        headers: {
+          Authorization: "Bearer " + store.state.user.access,
+        },
+        success(resp) {
+          if (resp.result === "success") {
+            // 若已关注,则取消关注
+            context.emit("unfollow");
+          }
+        },
+      });
     };
 
     // 函数返回值
     return {
-      fullName,
+      // fullName,
       follow,
       unfollow,
     };
@@ -97,5 +130,12 @@ img {
 button {
   padding: 2px 4px;
   font-size: 12px;
+}
+
+/* 头像居中 */
+.img-field {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 </style>

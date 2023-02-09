@@ -24,13 +24,13 @@
             >
           </li>
           <!-- 用户动态这里params:{userId:1}对应index里的'/userprofile/:userId/'的参数列表 -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <router-link
               class="nav-link"
               :to="{ name: 'userprofile', params: { userId: 1 } }"
               >用户动态</router-link
             >
-          </li>
+          </li> -->
         </ul>
         <!-- 使用 v-if ,当未登录时,显示“登录”和“注册” -->
         <ul class="navbar-nav" v-if="!$store.state.user.is_login">

@@ -63,6 +63,7 @@ const ModuleUser = {
     } 
 */
     login(context,data){
+      // 获取Json Web Token（JWT
       $.ajax({
         url: "https://app165.acapp.acwing.com.cn/api/token/",
         type: "POST",
@@ -78,6 +79,7 @@ const ModuleUser = {
           
           // 每隔 5 分钟对 access 令牌进行刷新,防止令牌过期导致无法成功登录,第二个参数是刷新的毫秒间隔
           setInterval(() => {
+            // 刷新JWT令牌
             $.ajax({
               url: "https://app165.acapp.acwing.com.cn/api/token/refresh/",
               type: "POST",
@@ -92,6 +94,7 @@ const ModuleUser = {
             });
           }, 4.5 * 60 * 1000);
 
+          // 获取某个用户的信息
           $.ajax({
             url: "https://app165.acapp.acwing.com.cn/myspace/getinfo/",
             type: "GET",

@@ -39,7 +39,7 @@ import ContentBase from "../components/ContentBase";
 import { ref } from "vue";
 import { useStore } from "vuex";
 // 引入 router 用于写入页面跳转,(router.push的内容与NavBar里定义的跳转内容是一致的)
-import router from "@/router/index.js";
+import router from "@/router/index";
 
 export default {
   name: "LoginView",
