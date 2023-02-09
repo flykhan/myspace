@@ -9,41 +9,41 @@ import NotFoundView from '../views/NotFoundView.vue'
 
 const routes = [
   {
-    path: '/',
+    path: '/myspace/',
     name: 'home',
     component: HomeView
   },
   {
-    path: '/userlist/',
+    path: '/myspace/userlist/',
     name: 'userlist',
     component: UserListView
   },
   {
     // “/userprofile/:参数名/” 用于通过不同参数访问不同用户的profile页面
-    path: '/userprofile/:userId/',
+    path: '/myspace/userprofile/:userId/',
     name: 'userprofile',
     component: UserProfileView
   },
   {
-    path: '/login/',
+    path: '/myspace/login/',
     name: 'login',
     component: LoginView
   },
   {
-    path: '/register/',
+    path: '/myspace/register/',
     name: 'register',
     component: RegisterView
   },
   {
-    path: '/404/',
+    path: '/myspace/404/',
     name: '404',
     component: NotFoundView
   },
   // 添加正则表达式匹配，使得非合法页面一致跳转到404
   {
-    path:'/:catchAll(.*)',
+    path:'/myspace/:catchAll(.*)',
     // 重定向到404
-    redirect:"/404/"
+    redirect:"/myspace/404/"
   }
 ]
 
